@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComicCraft - AI Comic Creator</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f3ff;
+            color: #242038;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+
+        header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto 50px;
+        }
+
+        .input-box {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 130px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            resize: vertical;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #8b5cf6;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #7044d8;
+        }
+
+        #loading {
+            display: none;
+            text-align: center;
+            margin: 25px;
+            font-size: 18px;
+        }
+
+        #comic {
+            display: none;
+            margin-top: 35px;
+        }
+
+        #comic h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .panels {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .panel {
+            background: white;
+            border: 4px solid #242038;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .panel-image {
+            height: 250px;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+        }
+
+        .panel-content {
+            padding: 15px;
+        }
+
+        .narration {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .dialogue {
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        @media (max-width: 700px) {
+            .panels {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🎨 ComicCraft</h1>
+        <p>Turn your story idea into an AI-powered comic.</p>
+    </header>
+
+    <div class="container">
+
+        <div class="input-box">
+            <label for="storyInput">✨ Enter your story idea</label>
+
+            <textarea
+                id="storyInput"
+                placeholder="Example: A student discovers a mysterious robot inside her college laboratory..."
+            ></textarea>
+
+            <button onclick="generateComic()">Generate Comic</button>
+        </div>
+
+        <div id="loading">
+            🤖 Creating your comic...
+        </div>
+
+        <div id="comic">
+
+            <h2 id="comicTitle">Your Comic</h2>
+
+            <div class="panels">
+
+                <div class="panel">
+                    <div class="panel-image">🖼️</div>
+                    <div class="panel-content">
+                        <div class="narration">
+                            It was a normal evening at the college.
+                        </div>
+                        <div class="dialogue">
+                            "Why is this computer switched on?"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-image">🤖</div>
+                    <div class="panel-content">
+                        <div class="narration">
+                            Suddenly, something moved inside the laboratory.
+                        </div>
+                        <div class="dialogue">
+                            "Who are you?"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-image">😲</div>
+                    <div class="panel-content">
+                        <div class="narration">
+                            The mysterious robot slowly turned around.
+                        </div>
+                        <div class="dialogue">
+                            "I have been waiting for you."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-image">✨</div>
+                    <div class="panel-content">
+                        <div class="narration">
+                            Together, they discovered something incredible.
+                        </div>
+                        <div class="dialogue">
+                            "Let's solve this mystery together!"
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        function generateComic() {
+
+            const story = document.getElementById("storyInput").value.trim();
+
+            if (story === "") {
+                alert("Please enter a story idea first!");
+                return;
+            }
+
+            document.getElementById("loading").style.display = "block";
+
+            setTimeout(() => {
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("comic").style.display = "block";
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
